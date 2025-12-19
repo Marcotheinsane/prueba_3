@@ -95,14 +95,16 @@ def editar_alumno(request, rut):
     return render(request, 'alumno/editar_alumno.html', {'alumno': alumno})
 
 def eliminar_alumno(request, rut):
-    alumno = Alumnos.objects.get(rut=rut)
-    alumno.delete()
-    return redirect('listar_alumnos')
-
+    alumno = get_object_or_404(Alumnos, rut=rut)
+    if request.method == 'POST':
+        alumno.delete()
+        return redirect('listar_alumnos')
+    return render(request, 'alumno/eliminar_alumnos.html', {'alumno': alumno})
 #crud de matriculas 
 def listar_matriculas(request):
     matriculas = Matriculas.objects.all()
     return render(request, 'matricula/listar_matriculas.html', {'matriculas': matriculas})
+
 def crear_matricula(request):
     if request.method == 'POST':
         codigo = request.POST.get('codigo')
@@ -117,6 +119,7 @@ def crear_matricula(request):
     alumnos = Alumnos.objects.all()
     sucursales = Sucursal.objects.all()
     return render(request, 'matricula/crear_matricula.html', {'cursos': cursos, 'alumnos': alumnos, 'sucursales': sucursales})
+
 def editar_matricula(request, codigo):
     matricula = Matriculas.objects.get(codigo=codigo)
     if request.method == 'POST':
