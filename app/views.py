@@ -6,9 +6,8 @@ from .models import Curso
 def home(request):
     return render(request, 'home.html')
 
-<<<<<<< Updated upstream
 
-=======
+
 #crud de cursos
 def listar_cursos(request):
     cursos = Curso.objects.all()
@@ -34,4 +33,4 @@ def eliminar_curso(request, codigo):
     curso = Curso.objects.get(codigo=codigo)
     curso.delete()
     return redirect('listar_cursos')
->>>>>>> Stashed changes
+
