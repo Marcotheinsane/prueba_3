@@ -1,13 +1,4 @@
 {% extends "curso/listar_cursos.html" %}
-def crear_curso(request):
-    if request.method == 'POST':
-        codigo = request.POST.get('nombre')
-        nombre = request.POST.get('descripcion')
-        valor = request.POST.get('duracion')
-        curso = Curso(codigo=codigo, nombre=nombre, valor=valor)
-        curso.save()
-        return redirect('listar_cursos')
-    return render(request, 'curso/crear_curso.html')
 {% block content %}
 <form method="post">
     {% csrf_token %}
